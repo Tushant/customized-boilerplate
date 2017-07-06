@@ -1,0 +1,12 @@
+export const COMMISSION_FETCH_REQUEST =
+  "XcelTrip/AdminDashboard/COMMISSION_FETCH_REQUEST";
+export const COMMISSION_FETCH_SUCCESS =
+  "XcelTrip/AdminDashboard/COMMISSION_FETCH_SUCCESS";
+export const COMMISSION_FETCH_FAILURE =
+  "XcelTrip/AdminDashboard/COMMISSION_FETCH_FAILURE";
+export const COMMISSION_SETUP_REQUEST =
+  "XcelTrip/AdminDashboard/COMMISSION_SETUP_REQUEST";
+export const COMMISSION_SETUP_SUCCESS =
+  "XcelTrip/AdminDashboard/COMMISSION_SETUP_SUCCESS";
+export const COMMISSION_SETUP_FAILURE =
+  "XcelTrip/AdminDashboard/COMMISSION_SETUP_FAILURE";

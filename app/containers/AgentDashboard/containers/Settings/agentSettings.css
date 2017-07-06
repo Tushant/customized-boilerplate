@@ -1,0 +1,69 @@
+.white-box {
+  background: #fff;
+  padding: 25px;
+  margin-bottom: 15px;
+}
+
+.user-bg {
+  margin: -25px;
+  height: 230px;
+  overflow: hidden;
+  position: relative;
+}
+
+.user-bg .overlay-box {
+  background: #b5a8b9;
+  opacity: .9;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  text-align: center;
+}
+.user-bg .overlay-box .user-content {
+  padding: 15px;
+  margin-top: 30px;
+}
+.user-btm-box {
+  padding: 40px 0 10px;
+  clear: both;
+  overflow: hidden;
+}
+
+.form-material .form-control,
+.form-material .form-control.focus,
+.form-material .form-control:focus {
+  background-image: linear-gradient(#b5a8b9, #b5a8b9),
+    linear-gradient(
+      rgba(120, 130, 140, .13),
+      rgba(120, 130, 140, .13)
+    ) !important;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  float: none;
+}
+
+.form-material .form-control {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: center bottom, center calc(99%) !important;
+  background-repeat: no-repeat;
+  background-size: 0 2px, 100% 1px;
+  padding: 0;
+  transition: background 0s ease-out 0s !important;
+}
+.form-material .form-group {
+  overflow: hidden;
+}
+.form-horizontal .form-group {
+  margin-left: -7.5px;
+  margin-right: -7.5px;
+  margin-bottom: 25px;
+}
+
+.update-agent-profile, .update-agent-profile:hover {
+  color: #fff;
+  background-color: #6b6388;
+  border-color: #6b6388;
+}
