@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { showDialog } from "containers/App/actions";
 import { logRequest, logDelete, logsDelete } from "./actions";
-import { selectDialog } from "containers/App/selectors";
+import { makeSelectDialog } from "containers/App/selectors";
 import { selectLogs, selectLogsLoadingState } from "./selectors";
 import Spinner from "assets/img/earthSpinning.svg";
 import LogsDetail from "./LogsDetail";
@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = createStructuredSelector({
   logs: selectLogs(),
   isRequesting: selectLogsLoadingState(),
-  dialog: selectDialog()
+  dialog: makeSelectDialog()
 });
 
 class Logs extends React.PureComponent {
@@ -38,7 +38,7 @@ class Logs extends React.PureComponent {
   }
   componentDidMount() {
     // this.props.requestLogs();
-    if (!this.props.logs.size) {
+    if (!this.props.logs) {
       this.props.requestLogs();
     }
   }

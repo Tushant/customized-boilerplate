@@ -9,7 +9,7 @@ import { selectLoginRequest } from "./selectors";
 import ForgotPassword from "./ForgotPassword";
 import Register from "containers/Register";
 import PropTypes from "prop-types";
-import Validator from "validator"; 
+import Validator from "validator";
 import isEmpty from "lodash/isEmpty";
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -58,9 +58,20 @@ class LoginContainer extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log("componentWillRecieveProps", nextProps);
-    console.log("componentWillRecieveProps2", this.props);
-    this.setState({ isLoading: false });
+    let err = nextProps.userLoginRequest.get("errors");
+    this.setState({
+      isLoading: false
+    });
+    if (err && err.size > 0) {
+      let error = err.get("body").data;
+      if (
+        error.captcha_enable ||
+        error.message === "Bot detected. Access Denied."
+      )
+        this.setState({
+          showCaptcha: true
+        });
+    }
   }
 
   isValid = () => {
@@ -125,7 +136,7 @@ class LoginContainer extends React.Component {
         <Modal.Header closeButton>
           <Modal.Title>
             Login
-            
+
           </Modal.Title>
         </Modal.Header>
         {notice && notice}

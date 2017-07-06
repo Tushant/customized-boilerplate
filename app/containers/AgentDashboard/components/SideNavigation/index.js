@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const sideMenus = [
   {
     menu: "Dashboard",
-    link: "agent/dashboard/home",
+    link: "agent/dashboard",
     image: require("assets/img/box.svg")
   },
   {

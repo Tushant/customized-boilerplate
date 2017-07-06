@@ -28,9 +28,6 @@ import Book from "components/Book";
 import Footer from "components/Footer";
 import { logout } from "containers/Login/actions";
 
-import "assets/css/bootstrap.css";
-import "assets/css/app.css";
-
 const mapDispatchToProps = dispatch => ({
   showDialog: dialog => dispatch(showDialog(dialog)),
   hideDialog: () => dispatch(showDialog(null)),
@@ -51,29 +48,6 @@ class HomePage extends React.PureComponent {
       isLoggedIn: false
     };
   }
-  componentDidMount() {
-    const userObject = JSON.parse(localStorage.getItem("user"));
-    this.setState({
-      isLoggedIn: userObject ? userObject.success : false
-    });
-  }
-  componentWillReceiveProps(nextProps) {
-    const userObject = JSON.parse(localStorage.getItem("user"));
-    this.setState({
-      isLoggedIn: userObject ? userObject.success : false
-    });
-  }
-  // eslint-disable-line react/prefer-stateless-function
-  handleDialog = form => {
-    const dialog = form === "login"
-      ? <Login onClose={() => this.props.hideDialog(null)} />
-      : <Register onClose={() => this.props.hideDialog(null)} />;
-    this.props.showDialog(dialog);
-  };
-
-  handleLogout = () => {
-    this.props.logout();
-  };
 
   render() {
     return (

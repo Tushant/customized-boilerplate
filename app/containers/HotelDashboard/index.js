@@ -6,13 +6,13 @@ import Routes from "./Routes";
 
 import TopNavigation from "./components/TopNavigation/navbar";
 import SideNavigation from "./components/SideNavigation";
-import { makeSelectLocation, selectUser } from "containers/App/selectors";
+import { makeSelectLocation, makeSelectUser } from "containers/App/selectors";
 import { logout } from "containers/LoginContainer/actions";
 import "./component.css";
 
 const mapStateToProps = createStructuredSelector({
   location: makeSelectLocation(),
-  user: selectUser()
+  user: makeSelectUser()
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -32,8 +32,8 @@ class HotelDashboard extends React.Component {
     let username;
     const { user } = this.props;
     const userObject = JSON.parse(localStorage.getItem("user")).userInfo;
-    const userInfo = user.get("userInfo");
-    if (!userInfo.size === 0) {
+    const userInfo = user && user.get("userInfo");
+    if (userInfo) {
       const first_name = userInfo["first_name"];
       const last_name = userInfo["last_name"];
       username = first_name + last_name;

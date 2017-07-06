@@ -5,7 +5,7 @@ import { createStructuredSelector } from "reselect";
 
 import { getFeatures, listFeature } from "./actions";
 import { showDialog } from "containers/App/actions";
-import { selectDialog } from "containers/App/selectors";
+import { makeSelectDialog } from "containers/App/selectors";
 import {
   selectFeatures,
   selectFeatureLoadingState,
@@ -19,7 +19,7 @@ const mapStateToProps = createStructuredSelector({
   features: selectFeatures(),
   isRequesting: selectFeatureLoadingState(),
   response: selectFeaturesResponse(),
-  dialog: selectDialog()
+  dialog: makeSelectDialog()
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -91,13 +91,15 @@ class FeatureSetting extends React.PureComponent {
   };
 
   renderFeatureName(features) {
-    return features.features.map(feature => {
+    console.log("features", features);
+    return features.get("features").valueSeq().map(feature => {
+      console.log("feature", feature.get("_id"));
       return (
-        <div key={feature._id}>
+        <div key={feature.get("_id")}>
           <div className="card card-sm clickable">
-            <h5>{feature.feature_name}</h5>
+            <h5>{feature.get("feature_name")}</h5>
             <p className="twoLine">
-              {feature.feature_description}
+              {feature.get("feature_description")}
             </p>
             <button
               className="btn btn-default floating"
@@ -114,17 +116,21 @@ class FeatureSetting extends React.PureComponent {
 
   renderFeatureType() {
     const { features } = this.props;
-    return features.length > 0
-      ? features.map(feature => {
+    return features.size > 0
+      ? features.valueSeq().map(feature => {
           return (
-            <div className="features" key={feature._id}>
-              <h3 className="bold">{feature.feature_name}</h3>
+            <div className="features" key={feature.get("_id")}>
+              <h3 className="bold">{feature.get("feature_name")}</h3>
               <div className="cards">
                 {this.renderFeatureName(feature)}
                 <div
                   className="card card-sm card-add clickable"
                   onClick={event =>
-                    this.handleFeatureAdd(event, feature, feature.feature_type)}
+                    this.handleFeatureAdd(
+                      event,
+                      feature,
+                      feature.get("feature_type")
+                    )}
                 >
                   <button className="btn btn-link">
                     <i className="icon-plus" />

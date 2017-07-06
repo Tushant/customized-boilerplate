@@ -1,6 +1,6 @@
 import React from "react";
 
-class AdminLayout extends React.Component {
+class UserLayout extends React.Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ class AdminLayout extends React.Component {
   }
 }
 
-export default AdminLayout;
+export default UserLayout;

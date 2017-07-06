@@ -16,7 +16,7 @@ import { ConnectedRouter } from "react-router-redux";
 import FontFaceObserver from "fontfaceobserver";
 import createHistory from "history/createBrowserHistory";
 import "sanitize.css/sanitize.css";
-
+import "leaflet/dist/leaflet.css";
 // Import root app
 import App from "containers/App";
 
@@ -24,8 +24,7 @@ import App from "containers/App";
 import LanguageProvider from "containers/LanguageProvider";
 
 // Import default loading component provider and LoadingIndicator that will be used as a loading component
-import DefaultLoadingComponentProvider
-  from "routing/DefaultLoadingComponentProvider";
+import DefaultLoadingComponentProvider from "routing/DefaultLoadingComponentProvider";
 import LoadingIndicator from "components/LoadingIndicator";
 
 // Load the favicon, the manifest.json file and the .htaccess file

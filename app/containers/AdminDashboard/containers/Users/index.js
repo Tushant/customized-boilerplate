@@ -5,9 +5,10 @@ import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 
 import { showDialog } from "containers/App/actions";
-import { selectDialog } from "containers/App/selectors";
+import { makeSelectDialog } from "containers/App/selectors";
 import { loadUsers, deleteUser } from "./actions";
 import { selectUsers, selectUserResponse } from "./selectors";
+import { isEmpty } from "utils/helper";
 import DeleteConfirmation from "components/DeleteConfirmation";
 
 const mapDispatchToProps = dispatch => ({
@@ -20,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = createStructuredSelector({
   users: selectUsers(),
   response: selectUserResponse(),
-  dialog: selectDialog()
+  dialog: makeSelectDialog()
 });
 
 // TODO change confirmed true/false to <span className="icon-tick"><span> or
@@ -70,14 +71,6 @@ class UserList extends React.Component {
       sizePerPage: 5,
       sizePerPageList: [5, 10, 15]
     };
-    const { users, response } = this.props;
-    let messageNotification;
-    if (response.size) {
-      messageNotification = <div>User deleted successfully</div>;
-    }
-    if (users.size === 0) {
-      return <div>loading</div>;
-    }
     const selectRowProp = {
       mode: "checkbox",
       clickToSelect: true,
@@ -85,9 +78,46 @@ class UserList extends React.Component {
       bgColor: "#2863a0",
       color: "#fff"
     };
+    const { users, response } = this.props;
+    let messageNotification;
+    if (response.length || response.size) {
+      messageNotification = <div>User deleted successfully</div>;
+    }
     return (
       <div className="container">
-        Users
+        {messageNotification}
+        {this.state.show ? this.props.dialog : null}
+        <h1>Users</h1>
+        {users.dataList
+          ? <BootstrapTable
+              data={users.dataList}
+              options={options}
+              pagination
+              striped
+              hover
+              search
+            >
+              <TableHeaderColumn dataField="first_name" dataSort>
+                First Name
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField="email">
+                Email
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField="user_role">
+                Role
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField="confirmed">
+                Confirmed
+              </TableHeaderColumn>
+              <TableHeaderColumn
+                dataField="_id"
+                isKey
+                dataFormat={this.editFormatter}
+              >
+                Actions
+              </TableHeaderColumn>
+            </BootstrapTable>
+          : null}
       </div>
     );
   }

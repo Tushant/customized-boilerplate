@@ -45,7 +45,6 @@ class AgentDetail extends React.Component {
   }
 
   componentWillReceiveProps(nextProps, prevProps) {
-    console.log("nextProps", nextProps.singleAgent);
     if (nextProps.singleAgent) {
       this.setState(state => ({
         agent: nextProps.singleAgent.toJS()
@@ -79,7 +78,6 @@ class AgentDetail extends React.Component {
   handleRemove = file => {
     const newState = this.state.accepted;
     if (newState.indexOf(file) > -1) {
-      console.log("newState", newState);
       newState.splice(newState.indexOf(file), 1);
       console.log("newState again", newState);
       this.setState({ accepted: newState });
@@ -112,35 +110,35 @@ class AgentDetail extends React.Component {
     if (agent) {
       return (
         <div className="card card-view">
-        
+
           <h2>Personal Info</h2>
-            <label>
-              First Name:
-            </label>
-            <div className="text-md mg-btm-sm">{agent.first_name}</div>
-            
-            <label>
-              Last Name:
-            </label>
-            <div className="text-md mg-btm-sm">{agent.last_name}</div>
-            
-            <label>
-              Username:
-            </label>
-            <div className="text-md mg-btm-sm">{agent.username}</div>
-            
-            <label>
-              Email:
-            </label>
-            <div className="text-md mg-btm-sm">{agent.email}</div>
-            
-            <label>
-              Mobile Number:
-            </label>
-            <div className="text-md mg-btm-sm">
-              {agent.mobile_number}
-            </div>
-                    </div>
+          <label>
+            First Name:
+          </label>
+          <div className="text-md mg-btm-sm">{agent.first_name}</div>
+
+          <label>
+            Last Name:
+          </label>
+          <div className="text-md mg-btm-sm">{agent.last_name}</div>
+
+          <label>
+            Username:
+          </label>
+          <div className="text-md mg-btm-sm">{agent.username}</div>
+
+          <label>
+            Email:
+          </label>
+          <div className="text-md mg-btm-sm">{agent.email}</div>
+
+          <label>
+            Mobile Number:
+          </label>
+          <div className="text-md mg-btm-sm">
+            {agent.mobile_number}
+          </div>
+        </div>
       );
     }
   }
@@ -149,36 +147,36 @@ class AgentDetail extends React.Component {
     if (!isEmpty(agent.agent_info)) {
       return (
         <div className="card card-view">
-        <img src={ProfilePic} className="img-responsive img-card" alt="" />
+          <img src={ProfilePic} className="img-responsive img-card" alt="" />
           <h2>Agent Info</h2>
-            <label>
-              Refer Code:
-            </label>
-            <div className="col-sm-5 col-xs-6 subtitle">
-              {agent.agent_info[0].refer_code}
-            </div>
-            
-            <label>
-              Terms and Conditions:
-            </label>
-            <div className="text-md mg-btm-sm">
-              {agent.agent_info[0].agent_terms_conditions ? "True" : "False"}
-            </div>
-            
-            <label>
-              Status:
-            </label>
-            <div className="text-md mg-btm-sm">
-              {agent.agent_status}
-            </div>
-            
-            <label>
-              Reason:
-            </label>
-            <div className="text-md mg-btm-sm">
-              {agent.agent_info[0].reason}
-            </div>
-         </div>
+          <label>
+            Refer Code:
+          </label>
+          <div className="col-sm-5 col-xs-6 subtitle">
+            {agent.agent_info[0].refer_code}
+          </div>
+
+          <label>
+            Terms and Conditions:
+          </label>
+          <div className="text-md mg-btm-sm">
+            {agent.agent_info[0].agent_terms_conditions ? "True" : "False"}
+          </div>
+
+          <label>
+            Status:
+          </label>
+          <div className="text-md mg-btm-sm">
+            {agent.agent_status}
+          </div>
+
+          <label>
+            Reason:
+          </label>
+          <div className="text-md mg-btm-sm">
+            {agent.agent_info[0].reason}
+          </div>
+        </div>
       );
     }
   }
@@ -250,16 +248,15 @@ class AgentDetail extends React.Component {
     if (!singleAgent) {
       return <div className="container">Loading the content for you...</div>;
     }
-    const json = JSON.stringify(agent, null, 4);
     return (
       <div className="container">
         {messageNotification && messageNotification}
         <div>
           <div className="row">
             <div className="col-md-12">
-                  <h1>Agent Profile</h1>
+              <h1>Agent Profile</h1>
               <div className="flex">
-                
+
                 {this.renderAgentPersonalDetail(agent)}
                 {this.renderAgentDetail(agent)}
               </div>
@@ -285,7 +282,6 @@ class AgentDetail extends React.Component {
             </form>
           </div>
         </div>
-        <pre>{json}</pre>
       </div>
     );
   }

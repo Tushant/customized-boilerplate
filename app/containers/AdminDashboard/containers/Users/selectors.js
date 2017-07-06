@@ -18,7 +18,8 @@ export const selectUserID = () => (_, props) => {
 
 export const selectUser = () =>
   createSelector([selectUsers(), selectUserID()], (users, userId) => {
-    return users.find(user => {
+    console.log("users", users);
+    return users.dataList.find(user => {
       const isObject = typeof user === "object";
       if (!isObject) {
         return false;

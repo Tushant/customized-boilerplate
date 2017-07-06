@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const sideMenus = [
   { menu: "Basic Information", link: "hotel/dashboard/content" },
-  { menu: "List Hotel", link: "hotel/dashboard/list_hotel" }
+  { menu: "List Hotel", link: "hotel/dashboard/list/hotel" }
 ];
 
 const SideNavigation = () => {

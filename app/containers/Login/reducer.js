@@ -34,10 +34,6 @@ function loginReducer(state = initialState, action) {
       return state
         .set("userInfo", action.user.data.userInfo)
         .set("isLoggedIn", true);
-    // return state.set({
-    //   userInfo: action.user.data.userInfo,
-    //   isLoggedIn: true
-    // });
     case LOGIN_FAILURE:
       console.log("login-error", action);
       return state

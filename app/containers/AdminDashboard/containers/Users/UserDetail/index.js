@@ -44,7 +44,6 @@ class UserDetail extends React.PureComponent {
   handleChange = event => {
     const fieldName = event.target.name;
     const fieldValue = event.target.value;
-    console.log("fieldName", fieldName, event.target.value);
     this.setState(state => ({
       user: { ...state.user, [fieldName]: fieldValue }
     }));
@@ -67,77 +66,78 @@ class UserDetail extends React.PureComponent {
     if (user) {
       return (
         <div>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor={user.first_name}>First Name</label>
-            <input
-              type="text"
-              id={user.first_name}
-              className="form-control"
-              name="first_name"
-              defaultValue={user.first_name && user.first_name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor={user.middle_name}>Middle Name</label>
-            <input
-              type="text"
-              id={user.middle_name}
-              className="form-control"
-              name="middle_name"
-              defaultValue={user.middle_name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor={user.last_name}>Last Name</label>
-            <input
-              type="text"
-              id={user.last_name}
-              className="form-control"
-              name="last_name"
-              defaultValue={user.last_name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor={user.username}>Username</label>
-            <input
-              type="text"
-              id={user.username}
-              className="form-control"
-              name="username"
-              defaultValue={user.username}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor={user.email}>Email</label>
-            <input
-              type="email"
-              id={user.email}
-              className="form-control"
-              name="email"
-              defaultValue={user.email}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label className="custom-control custom-checkbox">
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <label htmlFor={user.first_name}>First Name</label>
               <input
-                type="checkbox" className="custom-control-input"
-                onChange={this.handleActiveChecked}
-                checked={user.active}
+                type="text"
+                id={user.first_name}
+                className="form-control"
+                name="first_name"
+                defaultValue={user.first_name && user.first_name}
+                onChange={this.handleChange}
               />
-              <span className="custom-control-indicator" />
-              <span className="custom-control-description">
-                Active
-              </span>
-            </label>
-          </div>
-          <button className="btn btn-default">Save Changes</button>
-        </form>
+            </div>
+            <div className="form-group">
+              <label htmlFor={user.middle_name}>Middle Name</label>
+              <input
+                type="text"
+                id={user.middle_name}
+                className="form-control"
+                name="middle_name"
+                defaultValue={user.middle_name}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor={user.last_name}>Last Name</label>
+              <input
+                type="text"
+                id={user.last_name}
+                className="form-control"
+                name="last_name"
+                defaultValue={user.last_name}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor={user.username}>Username</label>
+              <input
+                type="text"
+                id={user.username}
+                className="form-control"
+                name="username"
+                defaultValue={user.username}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor={user.email}>Email</label>
+              <input
+                type="email"
+                id={user.email}
+                className="form-control"
+                name="email"
+                defaultValue={user.email}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label className="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  className="custom-control-input"
+                  onChange={this.handleActiveChecked}
+                  checked={user.active}
+                />
+                <span className="custom-control-indicator" />
+                <span className="custom-control-description">
+                  Active
+                </span>
+              </label>
+            </div>
+            <button className="btn btn-default">Save Changes</button>
+          </form>
         </div>
       );
     }
@@ -146,22 +146,28 @@ class UserDetail extends React.PureComponent {
     const { singleUser, response } = this.props;
     console.log("response", response);
     const { user, show } = this.state;
-    const styling = show ? 'block' : 'none';
+    const styling = show ? "block" : "none";
     let messageNotification;
     if (response.size || typeof response === "string") {
-      messageNotification = <div style={{ display: `${styling}`}}className="alert alert-success alert-toaster">User Updated successfully</div>;
+      messageNotification = (
+        <div
+          style={{ display: `${styling}` }}
+          className="alert alert-success alert-toaster"
+        >
+          User Updated successfully
+        </div>
+      );
     }
     if (!singleUser) {
       return <div>Loading the content for you...</div>;
     }
-
+    console.log("singleUser", singleUser);
     const json = JSON.stringify(user, null, 4);
     return (
       <div className="container">
         {messageNotification}
         <h1>User Detail Page</h1>
         {this.renderUserDetail(user)}
-        <pre>{json}</pre>
       </div>
     );
   }

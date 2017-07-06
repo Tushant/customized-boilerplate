@@ -1,4 +1,4 @@
-import 'whatwg-fetch';
+import "whatwg-fetch";
 
 /**
  * Parses the JSON returned by a network request
@@ -31,6 +31,16 @@ function checkStatus(response) {
   throw error;
 }
 
+export function requestJSON(url, options) {
+  if (options === undefined) {
+    options = {}; // eslint-disable-line no-param-reassign
+  }
+  // To send the cookies for same domain
+  options.credentials = "same-origin"; // eslint-disable-line no-param-reassign
+
+  return fetch(url, options).then(checkStatus).then(parseJSON);
+}
+
 /**
  * Requests a URL, returning a promise
  *
@@ -39,8 +49,8 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export default function request(url, options) {
-  return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON);
+export function request(url, options) {
+  return fetch(url, options).then(checkStatus).then(parseJSON);
 }
+
+export default request;

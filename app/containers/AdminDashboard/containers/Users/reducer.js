@@ -33,11 +33,9 @@ function userReducer(state = initialState, action) {
       return state
         .set("loading", false)
         .set("loaded", true)
-        .set("users", fromJS(action.users.data.dataList));
+        .set("users", action.users.data);
     case UPDATE_USER_SUCCESS:
-      return state
-        .set("loading", false)
-        .set("response", fromJS(action.response.data));
+      return state.set("loading", false).set("response", action.response.data);
     case LOAD_USER_FAILURE:
     case DELETE_USER_FAILURE:
     case UPDATE_USER_FAILURE:
@@ -46,7 +44,7 @@ function userReducer(state = initialState, action) {
       return state
         .set("loading", false)
         .set("deleted", true)
-        .set("response", fromJS(action.response))
+        .set("response", action.response)
         .set(
           "users",
           state.get("users").filter(user => {

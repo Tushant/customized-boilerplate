@@ -7,7 +7,7 @@ export const handleLoadedModules = (injectReducer, injectSagas) => (
   [reducer, sagas, component]
 ) => {
   injectReducer("emailService", reducer.default);
-  injectSagas(sagas.default);
+  injectSagas("emailServiceSagas", sagas.default);
   return component;
 };
 

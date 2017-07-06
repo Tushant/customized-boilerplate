@@ -15,6 +15,8 @@ import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import Login from "containers/Login";
 import Register from "containers/Register";
+import "assets/css/bootstrap.css";
+import "assets/css/app.css";
 
 const mapDispatchToProps = dispatch => ({
   showDialog: dialog => dispatch(showDialog(dialog)),

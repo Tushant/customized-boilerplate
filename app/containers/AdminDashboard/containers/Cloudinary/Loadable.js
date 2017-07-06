@@ -7,7 +7,7 @@ export const handleLoadedModules = (injectReducer, injectSagas) => (
   [reducer, sagas, component]
 ) => {
   injectReducer("cloudinary", reducer.default);
-  injectSagas(sagas.default);
+  injectSagas("cloudinary", sagas.default);
   return component;
 };
 

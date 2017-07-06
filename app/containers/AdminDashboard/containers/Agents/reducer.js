@@ -28,7 +28,6 @@ function agentReducer(state = initialState, action) {
     case UPDATE_AGENT:
       return state.set("fetching", true).set("fetched", false);
     case LOAD_AGENT_SUCCESS:
-      console.log("action", action.agents.data.dataList);
       return state
         .set("fetching", false)
         .set("fetched", true)

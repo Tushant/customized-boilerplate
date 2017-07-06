@@ -20,6 +20,9 @@ export const selectInitialize = () => state =>
 const makeSelectLocation = () =>
   createSelector(selectRoute, routeState => routeState.get("location").toJS());
 
+const makeSelectUser = () =>
+  createSelector(selectUser, userState => userState.get("userInfo"));
+
 const makeSelectDialog = () =>
   createSelector(selectGlobal, globalState => globalState.get("dialog"));
 
@@ -28,6 +31,7 @@ const selectHome = () => state => state.get("home");
 export {
   selectGlobal,
   makeSelectDialog,
+  makeSelectUser,
   makeSelectLocation,
   selectHome,
   selectUser

@@ -1,5 +1,5 @@
 /**
- * Asynchronously loads the modules for HomePage
+ * Asynchronously loads the component for NotFoundPage
  */
 import Loadable from "routing/Loadable";
 

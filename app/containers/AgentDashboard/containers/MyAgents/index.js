@@ -7,7 +7,7 @@ import ReferAgent from "../ReferAgent";
 import { loadMyAgents } from "./actions";
 import { selectMyAgents } from "./selectors";
 
-import { selectDialog } from "containers/App/selectors";
+import { makeSelectDialog } from "containers/App/selectors";
 import { showDialog } from "containers/App/actions";
 import EarthSpinning from "assets/img/earthSpinning.svg";
 
@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
   hideDialog: () => dispatch(showDialog(null))
 });
 const mapStateToProps = createStructuredSelector({
-  dialog: selectDialog(),
+  dialog: makeSelectDialog(),
   myAgents: selectMyAgents()
 });
 class MyAgents extends React.PureComponent {

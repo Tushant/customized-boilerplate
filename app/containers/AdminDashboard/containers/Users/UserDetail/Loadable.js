@@ -14,8 +14,8 @@ export const handleLoadedModules = (injectReducer, injectSagas) => (
 export default Loadable({
   loader: ({ injectReducer, injectSagas }) =>
     Promise.all([
-      import("./reducer"),
-      import("./sagas"),
+      import("../reducer"),
+      import("../sagas"),
       import("./index")
     ]).then(handleLoadedModules(injectReducer, injectSagas))
 });

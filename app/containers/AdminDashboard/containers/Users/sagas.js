@@ -64,6 +64,7 @@ function* updateUser(action) {
 }
 
 function* userWatcher() {
+  console.log("userWatching");
   yield takeLatest(LOAD_USER, loadUser);
   yield takeLatest(DELETE_USER, deleteUser);
   yield takeLatest(UPDATE_USER, updateUser);

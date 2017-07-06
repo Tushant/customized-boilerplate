@@ -6,8 +6,8 @@ import Loadable from "routing/Loadable";
 export const handleLoadedModules = (injectReducer, injectSagas) => (
   [reducer, sagas, component]
 ) => {
-  injectReducer("userReducer", reducer.default);
-  injectSagas("userSagas", sagas.default);
+  injectReducer("myAgentsReducer", reducer.default);
+  injectSagas("myAgentsSagas", sagas.default);
   return component;
 };
 

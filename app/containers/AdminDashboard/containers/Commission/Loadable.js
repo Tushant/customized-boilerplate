@@ -7,7 +7,7 @@ export const handleLoadedModules = (injectReducer, injectSagas) => (
   [reducer, sagas, component]
 ) => {
   injectReducer("commission", reducer.default);
-  injectSagas(sagas.default);
+  injectSagas("commissionSagas", sagas.default);
   return component;
 };
 

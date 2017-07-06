@@ -50,7 +50,7 @@ import {
 } from "containers/Register/ConfirmUser//actions";
 
 import { signupSuccess, signupError } from "containers/Register/actions";
-import { selectUser } from "containers/App/selectors";
+import { makeSelectUser } from "containers/App/selectors";
 import Login from "containers/Login";
 
 import {
@@ -81,7 +81,6 @@ export class XcelTrip {
         JSON.parse(localStorage.getItem("user"))["token"];
       const token = actionArguments[0];
       // const isMultipartFile = actionArguments[1] && actionArguments[1];
-      console.log("apiUri", requestURL);
       // "Content-Type": isMultipartFile ? "multipart/form-data" : "application/json";
       try {
         let options;
@@ -243,8 +242,7 @@ export class XcelTrip {
 
 function* redirectOnSuccess() {
   const action = yield take(LOGIN_SUCCESS);
-  const user = yield select(selectUser());
-  const userInfo = user.get("userInfo");
+  const userInfo = yield select(makeSelectUser());
 
   if (userInfo["user_role"].indexOf("agent") !== -1) {
     yield put(push("agent/dashboard/home"));
@@ -346,6 +344,7 @@ function* initialize() {
 }
 
 function* rootSaga() {
+  console.log("rootSaga");
   yield takeLatest(INITIALIZE, initialize);
   yield takeLatest(LOGIN_REQUEST, loginFlow);
   yield takeLatest(LOGOUT, logoutUser);
