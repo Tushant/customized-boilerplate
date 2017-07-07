@@ -1,8 +1,8 @@
 /**
- * Asynchronously loads the component for NotFoundPage
+ * Asynchronously loads the component for HomePage
  */
-import Loadable from "routing/Loadable";
+import Loadable from 'routing/Loadable';
 
 export default Loadable({
-  loader: () => import("./index")
+  loader: () => import('./index'),
 });

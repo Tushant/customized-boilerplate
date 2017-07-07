@@ -1,12 +1,11 @@
-import conformsTo from "lodash/conformsTo";
-import isEmpty from "lodash/isEmpty";
-import isFunction from "lodash/isFunction";
-import isObject from "lodash/isObject";
-import isString from "lodash/isString";
-import invariant from "invariant";
-import warning from "warning";
-
-import createReducer from "../reducers";
+import conformsTo from 'lodash/conformsTo';
+import isEmpty from 'lodash/isEmpty';
+import isFunction from 'lodash/isFunction';
+import isObject from 'lodash/isObject';
+import isString from 'lodash/isString';
+import invariant from 'invariant';
+import warning from 'warning';
+import createReducer from 'reducers';
 
 /**
  * Validate the shape of redux store
@@ -18,11 +17,11 @@ export function checkStore(store) {
     getState: isFunction,
     replaceReducer: isFunction,
     runSaga: isFunction,
-    asyncReducers: isObject
+    asyncReducers: isObject,
   };
   invariant(
     conformsTo(store, shape),
-    "(app/utils...) asyncInjectors: Expected a valid redux store"
+    '(app/utils...) asyncInjectors: Expected a valid redux store'
   );
 }
 
@@ -35,7 +34,7 @@ export function injectAsyncReducer(store, isValid) {
 
     invariant(
       isString(name) && !isEmpty(name) && isFunction(asyncReducer),
-      "(app/utils...) injectAsyncReducer: Expected `asyncReducer` to be a reducer function"
+      '(app/utils...) injectAsyncReducer: Expected `asyncReducer` to be a reducer function'
     );
 
     if (Reflect.has(store.asyncReducers, name)) return;
@@ -49,23 +48,20 @@ export function injectAsyncReducer(store, isValid) {
  * Inject an asynchronously loaded saga
  */
 export function injectAsyncSagas(store, isValid) {
-  return function injectSagas(name, sagas) {
+  return function injectSagas(sagas) {
     if (!isValid) checkStore(store);
-    if (store.asyncSagas[name]) {
-      return;
-    }
+
     invariant(
       Array.isArray(sagas),
-      "(app/utils...) injectAsyncSagas: Expected `sagas` to be an array of generator functions"
+      '(app/utils...) injectAsyncSagas: Expected `sagas` to be an array of generator functions'
     );
 
     warning(
       !isEmpty(sagas),
-      "(app/utils...) injectAsyncSagas: Received an empty `sagas` array"
+      '(app/utils...) injectAsyncSagas: Received an empty `sagas` array'
     );
 
     sagas.map(store.runSaga);
-    store.asyncSagas[name] = sagas;
   };
 }
 
@@ -77,7 +73,7 @@ export function getAsyncInjectors(store) {
 
   return {
     injectReducer: injectAsyncReducer(store, true),
-    injectSagas: injectAsyncSagas(store, true)
+    injectSagas: injectAsyncSagas(store, true),
   };
 }
 
@@ -85,11 +81,6 @@ export function getAsyncInjectors(store) {
  * Helper to log an error when asynchronous loading fails.
  */
 export function errorLoading(err) {
-  if (process.env.NODE_ENV !== "production") {
-    /* istanbul ignore next */
-    console.error(
-      "Error while loading or handling loaded components, sagas, or reducers\n",
-      err
-    ); // eslint-disable-line no-console
-  }
+  /* istanbul ignore next */
+  console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
 }

@@ -1,32 +1,60 @@
 // Important modules this config uses
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
+const OfflinePlugin = require("offline-plugin");
 
-module.exports = require('./webpack.base.babel')({
+module.exports = require("./webpack.base.babel")({
   // In production, we skip all hot-reloading stuff
-  entry: [
-    path.join(process.cwd(), 'app/app.js'),
-  ],
+  entry: [path.join(process.cwd(), "app/app.js")],
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
   output: {
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].chunk.js',
+    filename: "[name].[chunkhash].js",
+    chunkFilename: "[name].[chunkhash].chunk.js"
   },
 
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
+      name: "vendor",
       children: true,
       minChunks: 2,
-      async: true,
+      async: true
     }),
-
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: true,
+      compress: {
+        warnings: false, // Suppress uglification warnings
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
+        screw_ie8: true,
+        conditionals: true,
+        unused: true,
+        comparisons: true,
+        sequences: true,
+        dead_code: true,
+        evaluate: true,
+        if_return: true,
+        join_vars: true
+      },
+      output: {
+        comments: false
+      },
+      exclude: [/\.min\.js$/gi] // skip pre-minified libs
+    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0
+    }),
     // Minify and optimize the index.html
     new HtmlWebpackPlugin({
-      template: 'app/index.html',
+      template: "app/index.html",
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -37,38 +65,39 @@ module.exports = require('./webpack.base.babel')({
         keepClosingSlash: true,
         minifyJS: true,
         minifyCSS: true,
-        minifyURLs: true,
+        minifyURLs: true
       },
-      inject: true,
+      inject: true
     }),
 
     // Put it in the end to capture all the HtmlWebpackPlugin's
     // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
     new OfflinePlugin({
       relativePaths: false,
-      publicPath: '/',
+      publicPath: "/",
 
       // No need to cache .htaccess. See http://mxs.is/googmp,
       // this is applied before any match in `caches` section
-      excludes: ['.htaccess'],
+      excludes: [".htaccess"],
 
       caches: {
-        main: [':rest:'],
+        main: [":rest:"],
 
         // All chunks marked as `additional`, loaded after main section
         // and do not prevent SW to install. Change to `optional` if
         // do not want them to be preloaded at all (cached only when first loaded)
-        additional: ['*.chunk.js'],
+        additional: ["*.chunk.js"]
       },
 
       // Removes warning for about `additional` section usage
       safeToUseOptionalCaches: true,
 
-      AppCache: false,
-    }),
+      AppCache: false
+    })
   ],
 
   performance: {
-    assetFilter: (assetFilename) => !(/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename)),
-  },
+    assetFilter: assetFilename =>
+      !/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename)
+  }
 });
