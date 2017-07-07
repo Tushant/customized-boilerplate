@@ -7,7 +7,7 @@ import Routes from "./Routes";
 import TopNavigation from "./components/TopNavigation/navbar";
 import SideNavigation from "./components/SideNavigation";
 import { makeSelectLocation, makeSelectUser } from "containers/App/selectors";
-import { logout } from "containers/LoginContainer/actions";
+import { logout } from "containers/Login/actions";
 import "./component.css";
 
 const mapStateToProps = createStructuredSelector({

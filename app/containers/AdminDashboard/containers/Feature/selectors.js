@@ -17,7 +17,7 @@ const selectFeaturesResponse = () =>
 
 const selectFeatureLoadingState = () =>
   createSelector(selectFeatureState, loadingState =>
-    loadingState.get("loading")
+    loadingState.get("requesting")
   );
 
 const selectFeatureToEditById = () =>

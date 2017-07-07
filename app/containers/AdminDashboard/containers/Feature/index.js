@@ -91,15 +91,13 @@ class FeatureSetting extends React.PureComponent {
   };
 
   renderFeatureName(features) {
-    console.log("features", features);
-    return features.get("features").valueSeq().map(feature => {
-      console.log("feature", feature.get("_id"));
+    return features.features.map(feature => {
       return (
-        <div key={feature.get("_id")}>
+        <div key={feature._id}>
           <div className="card card-sm clickable">
-            <h5>{feature.get("feature_name")}</h5>
+            <h5>{feature.feature_name}</h5>
             <p className="twoLine">
-              {feature.get("feature_description")}
+              {feature.feature_description}
             </p>
             <button
               className="btn btn-default floating"
@@ -116,21 +114,17 @@ class FeatureSetting extends React.PureComponent {
 
   renderFeatureType() {
     const { features } = this.props;
-    return features.size > 0
-      ? features.valueSeq().map(feature => {
+    return features.length > 0
+      ? features.map(feature => {
           return (
-            <div className="features" key={feature.get("_id")}>
-              <h3 className="bold">{feature.get("feature_name")}</h3>
+            <div className="features" key={feature._id}>
+              <h3 className="bold">{feature.feature_name}</h3>
               <div className="cards">
                 {this.renderFeatureName(feature)}
                 <div
                   className="card card-sm card-add clickable"
                   onClick={event =>
-                    this.handleFeatureAdd(
-                      event,
-                      feature,
-                      feature.get("feature_type")
-                    )}
+                    this.handleFeatureAdd(event, feature, feature.feature_type)}
                 >
                   <button className="btn btn-link">
                     <i className="icon-plus" />

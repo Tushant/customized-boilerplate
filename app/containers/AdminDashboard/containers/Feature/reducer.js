@@ -15,7 +15,7 @@ import reviver from "utils/reviver";
 const idReviver = reviver("_id", true);
 
 const initialState = fromJS({
-  loading: false,
+  requesting: false,
   features: {},
   response: {}
 });
@@ -25,21 +25,23 @@ function featureReducer(state = initialState, action) {
     case LOAD_FEATURES:
     case LIST_FEATURE:
     case EDIT_FEATURE:
-      return state.set("loading", true);
+      return state.set("requesting", true);
     case LOAD_FEATURES_SUCCESS:
       return state
-        .set("loading", false)
-        .set("features", fromJS(action.features.data));
+        .set("requesting", false)
+        .set("features", action.features.data);
     case LIST_FEATURE_SUCCESS:
       console.log("features", action);
-      return state.set("loading", false).set("response", action.response);
+      return state.set("requesting", false).set("response", action.response);
     case EDIT_FEATURE_SUCCESS:
       console.log("EDIT_FEATURE_SUCCESS", action);
-      return state.set("loading", false).set("response", action.response);
+      return state
+        .set("requesting", false)
+        .set("response", fromJS(action.response));
     case LOAD_FEATURES_FAILURE:
     case LIST_FEATURE_FAILURE:
     case EDIT_FEATURE_FAILURE:
-      return state.set("loading", false).set("error", action.error);
+      return state.set("requesting", false).set("error", fromJS(action.error));
     default:
       return state;
   }

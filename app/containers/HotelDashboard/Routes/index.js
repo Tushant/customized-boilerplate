@@ -7,10 +7,10 @@ import loadParentPage from "../containers/ParentPage/Loadable";
 import loadListHotelPage from "../containers/ListHotel/Loadable";
 import loadNotFoundPage from "containers/NotFoundPage/Loadable";
 
-function HotelRoutes({ location, cloudinary }) {
+function HotelRoutes({ location }) {
   return (
     <Switch location={location}>
-      <Route exact path="/hotel/dashboard/home" load={loadParentPage} />
+      <Route exact path="/hotel/dashboard" load={loadParentPage} />
       <Route
         exact
         path="/hotel/dashboard/list/hotel"

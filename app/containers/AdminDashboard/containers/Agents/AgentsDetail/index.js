@@ -79,7 +79,6 @@ class AgentDetail extends React.Component {
     const newState = this.state.accepted;
     if (newState.indexOf(file) > -1) {
       newState.splice(newState.indexOf(file), 1);
-      console.log("newState again", newState);
       this.setState({ accepted: newState });
     }
   };

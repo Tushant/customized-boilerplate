@@ -245,13 +245,13 @@ function* redirectOnSuccess() {
   const userInfo = yield select(makeSelectUser());
 
   if (userInfo["user_role"].indexOf("agent") !== -1) {
-    yield put(push("agent/dashboard/home"));
+    yield put(push("agent/dashboard"));
   } else if (userInfo["user_role"].indexOf("hoteladmin") !== -1) {
-    yield put(push("hotel/dashboard/home"));
+    yield put(push("hotel/dashboard"));
   } else if (userInfo["user_role"].indexOf("superadmin") !== -1) {
-    yield put(push("admin/dashboard/home"));
+    yield put(push("admin/dashboard"));
   } else if (userInfo["user_role"].indexOf("enduser") !== -1) {
-    yield put(push("user/dashboard/home"));
+    yield put(push("user/dashboard"));
   }
 }
 

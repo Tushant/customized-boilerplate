@@ -26,6 +26,13 @@
 }
 
 @font-face {
+    font-family: "BebasNeue";
+    src: url(../fonts/BebasNeue.otf) format('opentype');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
     font-family: 'iconFont';
     src: url('../fonts/ionicons.ttf') format('truetype'), url('../fonts/ionicons.woff') format('woff'), url('../fonts/ionicons.svg#iconFont') format('svg');
     font-weight: normal;
@@ -84,12 +91,16 @@
 }
 
 .icon-trash:before {
-    content: "\f4c5";
+    content: "\f4c5"; cursor: pointer;
 }
+.ptn-1 { background:#fff url(../img/debut_light.png);  }
+
 
 .cards {
     margin-bottom: 40px;
 }
+
+.card .btn-link { text-decoration: none; }
 
 .flex {
     display: -webkit-flex;
@@ -102,13 +113,6 @@
 .flex .card {
     min-width: 400px;
     margin-right: 40px;
-}
-
-.img-card {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translate(-50%, -50%);
 }
 
 .cards .card {
@@ -127,10 +131,14 @@
     max-width: 400px;
 }
 
+.card-lg { width:900px; }
+
+.card-center { margin:0 auto; }
+
 .card-sm h5 {
     margin-top: 0;
     font-family: "HelveticaNeue-Bold";
-    max-height: 25px;
+    max-height: 28px;
     overflow: hidden;
 }
 
@@ -169,7 +177,7 @@ p.twoLine {
 }
 
 .btn.floating i {
-    font-size: 16px;
+    font-size: 16px; display: block;
 }
 
 .card.clickable {
@@ -214,10 +222,13 @@ p.twoLine {
     opacity: .1;
 }
 
+.btn.has-icon {  }
+
 .btn.has-icon i {
     font-size: 22px;
     color: #333;
 }
+
 
 li {
     list-style: none;
@@ -226,6 +237,7 @@ li {
 ul {
     padding-left: 0;
 }
+td:focus { outline:none; }
 
 tr.custom-select-class {
     color: #fff;
@@ -290,6 +302,14 @@ th {
 .mg-top-lg {
     margin-top: 80px;
 }
+
+.pd-btm-sm { padding-bottom:20px; }
+.pd-btm-md { padding-bottom:50px; }
+.pd-btm-lg { padding-bottom:80px; }
+
+.pd-all-sm { padding:20px; }
+.pd-all-md { padding:50px; }
+.pd-all-lg { padding:80px; }
 
 img.img-fluid {
     max-width: 100%;
@@ -366,10 +386,6 @@ header {
     z-index: 90;
 }
 
-.logo {
-    margin-top: 10px; max-width: 150px;
-}
-
 main {
     padding-top: 65px;
     background: #f5f5f5;
@@ -381,7 +397,7 @@ main > [class*="container"] {
     padding-left: 40px;
    /* width: calc(100% - 200px);*/
    max-width:1040px;
-   margin:-;
+   margin:0;
 }
 
 main > nav {
@@ -397,6 +413,12 @@ main h1 {
 #header {
     height: 100px;
 }
+
+.thumb-lg { height:100px; }
+
+.img-floating { position: relative; left:50%; transform: translateX(-50%);
+}
+.img-floating.thumb-lg { top:-50px;  }
 
 .bg-full {
     background-size: cover;
@@ -475,7 +497,7 @@ main > nav li a span {
 }
 
 main > nav li li a {
-    padding: 10px 5px 10px 35px;
+    padding: 10px 15px 10px 20px;
     opacity: 0;
     transform: translateX(20%);
 }
@@ -566,9 +588,9 @@ header .dropdown-toggle {
 }
 
 .logo {
-    margin-top: 20px;
+    margin-top: 30px;
 }
-.logo-sm { height:42px; margin-top: 10px; }
+.logo-sm { height:42px; margin-top: 10px; max-width:150px; }
 
 body {
     color: #4A4A4A;
@@ -722,10 +744,11 @@ h2 {
 
 .react-bs-table-pagination .btn-default {
     color: #333;
-    border: 1px solid #999;
-    background: #ddd;
+    border: 1px solid #ccc;
+    background: #fff;
     box-shadow: none;
 }
+.react-bs-table-pagination>.row>div>.col-md-6:last-child { text-align: right; }
 
 .sm-box {
     width: 500px;
@@ -1168,12 +1191,7 @@ input.react-phone-number-input__phone:focus {
     text-decoration: underline;
 }
 
-.dropped  { margin-bottom: 20px; }
-
-.dropped li {
-    background:#eee; padding:4px 10px; margin-bottom:10px; font-size: 12px;
-    border-radius:2px;
-}
+.dropzone-files .icon-trash { font-size: 20px; }
 
 .dropped label i {
     position: absolute;
@@ -1196,6 +1214,7 @@ table.clickable tr:hover .btn-link {
 .actions .btn {
     margin-right: 10px;
     box-shadow: none;
+    padding:4px 10px
 }
 
 .actions .btn-default {
@@ -1332,6 +1351,10 @@ div.react-bs-container-header table.table > thead > tr > th {
     color: #fff;
     font-size: 14px;
 }
+
+.modal-confirm .modal-content { padding:0;}
+.modal-confirm .btn { width:50%; border-radius:0; border-right:1px solid #eee; border-top: 1px solid #eee;  }
+.modal-confirm .btn:last-child { border-right:none;  }
 
 
 .alert-sticky { position: fixed;

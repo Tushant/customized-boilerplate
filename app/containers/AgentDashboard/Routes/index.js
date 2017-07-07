@@ -6,11 +6,12 @@ import { makeSelectLocation } from "containers/App/selectors";
 import loadParentPage from "../containers/ParentPage/Loadable";
 import loadMyHotelsPage from "../containers/MyHotels/Loadable";
 import loadMyAgentsPage from "../containers/MyAgents/Loadable";
-import loadMyAgentDetailPage from "../containers/MyAgents/MyAgentDetail/Loadable";
+import loadMyAgentDetailPage
+  from "../containers/MyAgents/MyAgentDetail/Loadable";
 import loadSettingsPage from "../containers/Settings/Loadable";
 import loadNotFoundPage from "containers/NotFoundPage/Loadable";
 
-function AgentRoutes({ location, cloudinary }) {
+function AgentRoutes({ location }) {
   return (
     <Switch location={location}>
       <Route exact path="/agent/dashboard" load={loadParentPage} />

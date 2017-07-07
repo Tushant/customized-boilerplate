@@ -9,8 +9,10 @@ import Routes from "./Routes";
 
 import { makeSelectLocation } from "containers/App/selectors";
 import { makeSelectUser } from "containers/App/selectors";
-import { logout } from "containers/LoginContainer/actions";
-import { resendConfirmationRequest } from "containers/Register/ConfirmUser/actions";
+import { logout } from "containers/Login/actions";
+import {
+  resendConfirmationRequest
+} from "containers/Register/ConfirmUser/actions";
 import "./component.css";
 
 const mapStateToProps = createStructuredSelector({

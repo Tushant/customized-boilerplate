@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectUser } from "containers/App/selectors";
+import { makeSelectUser } from "containers/App/selectors";
 import ProfilePic from "assets/img/noProfile.svg";
 
 class ParentPage extends React.PureComponent {

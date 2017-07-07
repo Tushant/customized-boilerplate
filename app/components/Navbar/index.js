@@ -9,7 +9,7 @@ const Navbar = ({ user, menus, userForm, handleLogout }) => {
   return (
     <div className="" id="top" role="banner">
       <div id="header" className="container">
-      <img src={Logo} alt="xceltrip" className="logo" />
+        <img src={Logo} alt="xceltrip" className="logo" />
         <nav className="nav navbar-nav navbar-right" role="navigation">
           <ul>
             <li>
