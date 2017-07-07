@@ -20,8 +20,28 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class ForgotPassword extends React.PureComponent {
-  state = { email: "" }; // added _id for put request
+  state = {
+    email: "",
+    error: {},
+    message: {}
+  }; // added _id for put request
 
+  componentWillReceiveProps(nextProps) {
+    let messages = nextProps.confirmForgotPassword.messages;
+
+    let err = nextProps.confirmForgotPassword.errors;
+
+    debugger;
+    if (
+      messages &&
+      messages.hasOwnProperty("data") &&
+      messages.status === 200
+    ) {
+      this.setState({ error: {}, message: messages });
+    } else {
+      this.setState({ error: err, message: {} });
+    }
+  }
   handleChange = e => {
     e.preventDefault();
     this.setState({
@@ -40,11 +60,13 @@ class ForgotPassword extends React.PureComponent {
   };
 
   render() {
-    const { confirmForgotPassword } = this.props;
-    console.log("forgot password", confirmForgotPassword);
     return (
       <Modal show onHide={() => this.props.hideDialog()} className="modal-sm">
         <Modal.Header closeButton />
+        {this.state.error.data &&
+          <p className="alert alert-danger">{this.state.error.data}</p>}
+        {this.state.message.data &&
+          <p className="alert alert-success">{this.state.message.data}</p>}
         <img src={forgotImg} alt="forgot" style={{ width: "72px" }} />
         <h1>Reset Your Password</h1>
         <p>
@@ -71,14 +93,10 @@ class ForgotPassword extends React.PureComponent {
               >
                 Return to login
               </a>
-
               <button type="submit" className="btn btn-default">Submit</button>
             </div>
           </div>
         </form>
-        {confirmForgotPassword.successful &&
-          <p>{confirmForgotPassword.messages.data}</p>}
-
       </Modal>
     );
   }

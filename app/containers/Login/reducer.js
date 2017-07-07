@@ -34,6 +34,10 @@ function loginReducer(state = initialState, action) {
       return state
         .set("userInfo", action.user.data.userInfo)
         .set("isLoggedIn", true);
+    // return state.set({
+    //   userInfo: action.user.data.userInfo,
+    //   isLoggedIn: true
+    // });
     case LOGIN_FAILURE:
       console.log("login-error", action);
       return state
@@ -46,6 +50,10 @@ function loginReducer(state = initialState, action) {
       localStorage.clear();
       return state.set("messages", fromJS(action.response.data));
     case LOGOUT_FAILURE:
+      if((action.error && action.error.data && action.error.data.isToken === true) && (action.error && action.error.status === 401)) {
+        localStorage.clear();
+        return state.set("messages", "");
+      }
       return state.set("error", fromJS(action.error));
     case DEFAULT_ACTION:
       return state;

@@ -19,12 +19,17 @@ function forgotPasswordReducer(state = initialState, action) {
       return Object.assign({}, state, {
         "requesting": false,
         "successful": true,
-        "messages": action.user
+        "messages": action.user,
+        "errors": {}
       });
     case TYPES.FORGOT_PASSWORD_ERROR:
       console.log('forgot-password-error',action);
-      return Object.assign({}, state,
-        {"requesting": false, "successful": false, "errors": action.error});
+      return Object.assign({}, state, {
+        "requesting": false,
+        "successful": false,
+        "messages": {},
+        "errors": action.error
+      });
     default:
       return state;
   }

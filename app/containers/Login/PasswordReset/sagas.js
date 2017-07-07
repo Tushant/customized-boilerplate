@@ -14,13 +14,11 @@ import { XcelTrip } from "containers/App/sagas";
 
 function* redirectOnSuccess() {
   const action = yield take(TYPES.PASSWORD_RESET_SUCCESS);
-  console.log("token get success", action);
   // yield put(push(`/`));
 }
 
 function* passwordResetFlow(action) {
   const successWatcher = yield fork(redirectOnSuccess);
-  console.log('data', action.data);
   yield call(XcelTrip.get(`api/password-reset/user/${action.data}`, passwordResetSuccess, passwordResetError, action.data));
   yield take([LOCATION_CHANGE, TYPES.PASSWORD_RESET_ERROR]);
   yield cancel(successWatcher);
@@ -28,8 +26,7 @@ function* passwordResetFlow(action) {
 
 function* redirectOnNewPasswordSuccess() {
   const action = yield take(TYPES.NEW_PASSWORD_SUCCESS);
-  console.log("token get success", action);
-  yield put(push(`/`));
+  // yield put(push(`/`));
 }
 function* newPasswordFlow(action) {
   const successWatcher = yield fork(redirectOnNewPasswordSuccess);

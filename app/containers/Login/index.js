@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 import Validator from "validator";
 import isEmpty from "lodash/isEmpty";
 import ReCAPTCHA from "react-google-recaptcha";
+import { exposeFuncs } from "react-google-recaptcha";
 
 const validateInput = data => {
   let errors = {};
@@ -39,7 +40,7 @@ const mapStateToProps = createStructuredSelector({
   // userSignupRequest: selectSignupRequest(),
 });
 
-class LoginContainer extends React.Component {
+class Login extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     loginRequest: PropTypes.func.isRequired
@@ -51,7 +52,7 @@ class LoginContainer extends React.Component {
     },
     reCaptcha: "",
     showCaptcha: false,
-    err: null,
+    message: "",
     errors: {},
     isLoading: false,
     remember_me: false
@@ -71,7 +72,22 @@ class LoginContainer extends React.Component {
         this.setState({
           showCaptcha: true
         });
+      this.setState({ message: error.message || "" });
     }
+  }
+  componentWillUnmount() {
+    this.setState({
+      credentials: {
+        username: "",
+        password: ""
+      },
+      reCaptcha: "",
+      showCaptcha: false,
+      err: null,
+      errors: {},
+      isLoading: false,
+      remember_me: false
+    });
   }
 
   isValid = () => {
@@ -105,6 +121,7 @@ class LoginContainer extends React.Component {
             { ...this.state.credentials, reCaptcha: this.state.reCaptcha }
           )
         );
+        window.grecaptcha.reset();
       } else {
         this.props.loginRequest(Object.assign({}, this.state.credentials));
       }
@@ -116,20 +133,11 @@ class LoginContainer extends React.Component {
     this.setState({
       reCaptcha: e
     });
+    // ReCAPTCHA.reset();
   };
 
   render() {
-    const { errors, credentials, isLoading, showCaptcha } = this.state;
-    const { userLoginRequest } = this.props;
-    let notice = null;
-
-    let err = userLoginRequest.get("errors");
-    if (err && err.size > 0) {
-      let error = err.get("body").data;
-      notice = error.message
-        ? <p className="alert alert-danger">{error.message}</p>
-        : <p className="alert alert-danger">{error}</p>;
-    }
+    const { errors, credentials, isLoading, showCaptcha, message } = this.state;
 
     return (
       <Modal show onHide={() => this.props.hideDialog()}>
@@ -139,7 +147,7 @@ class LoginContainer extends React.Component {
 
           </Modal.Title>
         </Modal.Header>
-        {notice && notice}
+        {message && <p className="alert alert-danger">{message}</p>}
         <form onSubmit={this.handleSubmit}>
           <div className="form-group form-block">
             <input
@@ -166,7 +174,7 @@ class LoginContainer extends React.Component {
           {showCaptcha &&
             <ReCAPTCHA
               ref="reCaptcha"
-              sitekey="6LfUDCcUAAAAANoaITqPr5ULqb6pZRcewBBSvnxj"
+              sitekey={RECAPTCH_SITE_KEY}
               onChange={this.onChange}
             />}
           <p>
@@ -210,4 +218,4 @@ class LoginContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
