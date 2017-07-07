@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import NavLink from "react-router-dom/NavLink";
-import Logo from "assets/img/logo.png";
+import Logo from "assets/img/logo.svg";
 import ProfilePic from "assets/img/noProfile.svg";
 
 let isDroppedDown = false;

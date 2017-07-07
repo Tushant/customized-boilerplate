@@ -8,6 +8,7 @@ import { selectAgent, selectAgents, selectAgentResponse } from "../selectors";
 import { isEmpty } from "utils/helper";
 import styles from "assets/css/dropzone";
 import ProfilePic from "assets/img/noProfile.svg";
+import UserPic from "assets/img/pic.png";
 
 const mapStateToProps = createStructuredSelector({
   agents: selectAgents(),
@@ -85,24 +86,25 @@ class AgentDetail extends React.Component {
   showFiles() {
     const { accepted } = this.state;
     return (
-      <div className="container">
-        <h3>Dropped files: </h3>
-        <ul className="gallery">
-          {accepted.map((file, idx) => {
-            return (
-              <div className="col-md-3" key={idx}>
-                <div className="documentName">
-                  <span>{file.name}</span>
-                  <span onClick={e => this.handleRemove(file)}>remove</span>
-                </div>
+      <ul className="dropzone-files">
+        {accepted.map((file, idx) => {
+          return (
+            <li key={idx}>
+              <div className="alert alert-success clearfix">
+                <span className="pull-left">{file.name}</span>
+                <span
+                  className="pull-right"
+                  onClick={e => this.handleRemove(file)}
+                >
+                  <i className="icon-trash text-danger" />
+                </span>
               </div>
-            );
-          })}
-        </ul>
-      </div>
+            </li>
+          );
+        })}
+      </ul>
     );
   }
-
   renderAgentPersonalDetail(agent) {
     // const { agent } = this.state;
     if (agent) {
@@ -145,15 +147,23 @@ class AgentDetail extends React.Component {
     if (!isEmpty(agent.agent_info)) {
       return (
         <div className="card card-view">
-          <img src={ProfilePic} className="img-responsive img-card" alt="" />
+          <a href="">
+            <img
+              src={UserPic}
+              className="thumb-lg img-circle img-floating"
+              alt="profile"
+            />
+          </a>
           <h2>Agent Info</h2>
-          <label>
-            Refer Code:
-          </label>
-          <div className="col-sm-5 col-xs-6 subtitle">
-            {agent.agent_info[0].refer_code}
-          </div>
-
+          {agent.agent_info[0].refer_code &&
+            <div>
+              <label>
+                Refer Code:
+              </label>
+              <div className="col-sm-5 col-xs-6 subtitle">
+                {agent.agent_info[0].refer_code}
+              </div>
+            </div>}
           <label>
             Terms and Conditions:
           </label>
@@ -167,13 +177,15 @@ class AgentDetail extends React.Component {
           <div className="text-md mg-btm-sm">
             {agent.agent_status}
           </div>
-
-          <label>
-            Reason:
-          </label>
-          <div className="text-md mg-btm-sm">
-            {agent.agent_info[0].reason}
-          </div>
+          {agent.agent_info[0].reason &&
+            <div>
+              <label>
+                Reason:
+              </label>
+              <div className="text-md mg-btm-sm">
+                {agent.agent_info[0].reason}
+              </div>
+            </div>}
         </div>
       );
     }
@@ -244,7 +256,11 @@ class AgentDetail extends React.Component {
       messageNotification = <div>Agent Updated successfully</div>;
     }
     if (!singleAgent) {
-      return <div className="container">Loading the content for you...</div>;
+      return (
+        <div className="alert alert-success">
+          Loading the content for you...
+        </div>
+      );
     }
     return (
       <div className="container">

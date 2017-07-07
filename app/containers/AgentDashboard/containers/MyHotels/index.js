@@ -1,14 +1,19 @@
 import React from "react";
-import add_hotel_full from "assets/img/add_hotel_full.png";
 
 class MyHotels extends React.PureComponent {
   render() {
     return (
       <div className="container">
-        <div className="block">
-          <img src={add_hotel_full} alt="add_hotel_full" />
+        <div className="block bg-dark-blue clearfix addHotel">
+          <div className="col-sm-6">
+            <h2 className="thin">
+              List Property<br />Grow your business 24hrs.
+            </h2>
+            <button className="btn btn-outline bg-purple bold">
+              Add Property
+            </button>
+          </div>
         </div>
-
         <div className="row">
           <div className="col-sm-6">
             <div className="card">

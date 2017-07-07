@@ -54,7 +54,7 @@ class MyAgents extends React.PureComponent {
   };
   editFormatter = (cell, row) => {
     return (
-      <div className="action">
+      <div className="actions">
         <NavLink
           className="btn btn-default"
           to={`/agent/dashboard/my-agent/${cell}`}

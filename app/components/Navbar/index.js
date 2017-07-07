@@ -1,15 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "react-router-dom/Link";
 
 import Logo from "assets/img/logo.svg";
 
 let isDroppedDown = false;
 const Navbar = ({ user, menus, userForm, handleLogout }) => {
-  // const menuItems = menus && menus.map(menu => <li key={menu}>{menu}</li>);
   return (
     <div className="" id="top" role="banner">
       <div id="header" className="container">
-        <img src={Logo} alt="xceltrip" className="logo" />
+        <Link to="/"><img src={Logo} alt="xceltrip" className="logo" /></Link>
         <nav className="nav navbar-nav navbar-right" role="navigation">
           <ul>
             <li>

@@ -10,13 +10,13 @@ import loadNotFoundPage from "containers/NotFoundPage/Loadable";
 function HotelRoutes({ location }) {
   return (
     <Switch location={location}>
-      <Route exact path="/hotel/dashboard" load={loadParentPage} />
+      <Route exact path="/hotel/dashboard" component={loadParentPage} />
       <Route
         exact
         path="/hotel/dashboard/list/hotel"
-        load={loadListHotelPage}
+        component={loadListHotelPage}
       />
-      <Route exact path="*" load={loadNotFoundPage} />
+      <Route exact path="*" component={loadNotFoundPage} />
     </Switch>
   );
 }

@@ -69,6 +69,7 @@ class HomeLayout extends React.Component {
           user={this.state.isLoggedIn}
           handleLogout={this.handleLogout}
         />
+        {this.props.dialog}
         {this.props.children}
         <Footer />
       </div>

@@ -108,7 +108,7 @@ class Logs extends React.PureComponent {
     // }
     return (
       <div className="container">
-        <div className="row mg-btm-md">
+        <div className="row">
           <div className="col-xs-6"> <h1>Logs</h1></div>
           <div className="col-xs-6 text-right">
             {Boolean(logs.size) &&

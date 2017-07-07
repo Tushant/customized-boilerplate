@@ -7,24 +7,35 @@ import { makeSelectLocation } from "containers/App/selectors";
 import loadParentPage from "../containers/ParentPage/Loadable";
 import loadMyHotelsPage from "../containers/MyHotels/Loadable";
 import loadMyAgentsPage from "../containers/MyAgents/Loadable";
-import loadMyAgentDetailPage
-  from "../containers/MyAgents/MyAgentDetail/Loadable";
+import loadMyAgentDetailPage from "../containers/MyAgents/MyAgentDetail/Loadable";
 import loadSettingsPage from "../containers/Settings/Loadable";
 import loadNotFoundPage from "containers/NotFoundPage/Loadable";
 
 function AgentRoutes({ location }) {
   return (
     <Switch location={location}>
-      <Route exact path="/agent/dashboard" load={loadParentPage} />
-      <Route exact path="/agent/dashboard/my-hotels" load={loadMyHotelsPage} />
-      <Route exact path="/agent/dashboard/my-agents" load={loadMyAgentsPage} />
+      <Route exact path="/agent/dashboard" component={loadParentPage} />
+      <Route
+        exact
+        path="/agent/dashboard/my-hotels"
+        component={loadMyHotelsPage}
+      />
+      <Route
+        exact
+        path="/agent/dashboard/my-agents"
+        component={loadMyAgentsPage}
+      />
       <Route
         exact
         path="/agent/dashboard/my-agent/:id"
-        load={loadMyAgentDetailPage}
+        component={loadMyAgentDetailPage}
       />
-      <Route exact path="/agent/dashboard/settings" load={loadSettingsPage} />
-      <Route exact path="*" load={loadNotFoundPage} />
+      <Route
+        exact
+        path="/agent/dashboard/settings"
+        component={loadSettingsPage}
+      />
+      <Route exact path="*" component={loadNotFoundPage} />
     </Switch>
   );
 }

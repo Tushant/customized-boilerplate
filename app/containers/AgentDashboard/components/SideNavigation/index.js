@@ -3,24 +3,16 @@ import NavLink from "react-router-dom/NavLink";
 
 const sideMenus = [
   {
-    menu: "Dashboard",
-    link: "agent/dashboard",
-    image: require("assets/img/box.svg")
-  },
-  {
     menu: "My Hotel",
-    link: "agent/dashboard/my-hotels",
-    image: require("assets/img/box.svg")
+    link: "agent/dashboard/my-hotels"
   },
   {
     menu: "My Agents",
-    link: "agent/dashboard/my-agents",
-    image: require("assets/img/box.svg")
+    link: "agent/dashboard/my-agents"
   },
   {
     menu: "Settings",
-    link: "agent/dashboard/settings",
-    image: require("assets/img/box.svg")
+    link: "agent/dashboard/settings"
   }
 ];
 
@@ -29,7 +21,6 @@ const SideNavigation = () => {
     return (
       <li key={menuItem.link}>
         <NavLink to={`/${menuItem.link}`}>
-          <img src={menuItem.image} alt="dashboard" />
           <span>{menuItem.menu}</span>
         </NavLink>
       </li>
@@ -37,6 +28,12 @@ const SideNavigation = () => {
   });
   return (
     <nav>
+      <li>
+        <NavLink to="/agent/dashboard">
+          <i className="icon-speedometer" />
+          <span>Dashboard</span>
+        </NavLink>
+      </li>
       <ul>
         {menuToShow}
       </ul>

@@ -7,8 +7,9 @@ import { loadMyAgents } from "../actions";
 import { selectMyAgents, selectAgent } from "../selectors";
 import { isEmpty } from "utils/helper";
 import styles from "assets/css/dropzone";
-import ProfilePic from "assets/img/noProfile.svg";
 import EarthSpinning from "assets/img/earthSpinning.svg";
+import ProfilePic from "assets/img/noProfile.svg";
+import UserPic from "assets/img/pic.png";
 
 const mapStateToProps = createStructuredSelector({
   agents: selectMyAgents(),
@@ -50,47 +51,50 @@ class MyAgentDetail extends React.Component {
     if (agent) {
       return (
         <div className="card card-view">
+          <a href="">
+            <img
+              src={UserPic}
+              className="thumb-lg img-circle img-floating"
+              alt=""
+            />
+          </a>
           <h2>Personal Info</h2>
-            <label>
-              First Name:
-            </label>
-            <div className="text">
-              {agent.user_info.first_name}
-            </div>
-            <label>
-              Last Name:
-            </label>
-           <div className="text-lg">
-              {agent.user_info.last_name}
-            </div>
-            <div className="clearfix" />
-            <label>
-              Username:
-            </label>
-           <div className="text-lg">
-              {agent.user_info.username}
-            </div>
-            <div className="clearfix" />
-            <label>
-              Email:
-            </label>
-           <div className="text-lg">
-              {agent.user_info.email}
-            </div>
-            <div className="clearfix" />
-            <label>
-              Mobile Number:
-            </label>
-           <div className="text-lg">
-              {agent.user_info.mobile_number}
-            </div>
-            <div className="clearfix" />
-            <label>
-              Status:
-            </label>
-           <div className="text-lg">
-              {agent.user_info.agent_status}
-            </div>
+          <label>
+            First Name
+          </label>
+          <div className="text-md mg-btm-sm">
+            {agent.user_info.first_name}
+          </div>
+          <label>
+            Last Name
+          </label>
+          <div className="text-md mg-btm-sm">
+            {agent.user_info.last_name}
+          </div>
+          <label>
+            Username
+          </label>
+          <div className="text-md mg-btm-sm">
+            {agent.user_info.username}
+          </div>
+          <label>
+            Email:
+          </label>
+          <div className="text-md mg-btm-sm">
+            {agent.user_info.email}
+          </div>
+          <label>
+            Mobile Number:
+          </label>
+          <div className="text-md mg-btm-sm">
+            {agent.user_info.mobile_number}
+          </div>
+          <label>
+            Status:
+          </label>
+          <div className="text-md mg-btm-sm">
+            {agent.user_info.agent_status}
+          </div>
         </div>
       );
     }

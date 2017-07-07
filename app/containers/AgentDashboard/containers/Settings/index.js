@@ -9,10 +9,9 @@ import Phone, {
 import { loadMyProfile, updateProfile } from "./actions";
 import { selectMyProfile } from "./selectors";
 import { isEmpty } from "utils/helper";
-import ProfilePic from "assets/img/noProfile.svg";
+import ProfilePic from "assets/img/pic.png";
 import rrui from "react-phone-number-input/rrui.css";
 import rpni from "react-phone-number-input/style.css";
-import "./agentSettings.css";
 
 const mapStateToProps = createStructuredSelector({
   myProfile: selectMyProfile()
@@ -204,34 +203,27 @@ class Settings extends React.PureComponent {
         {this.state.notification && this.state.notification}
         <div className="agent_profile">
           <div className="col-md-4 col-xs-12">
-            <div className="white-box">
-              <div className="user-bg">
-                <div className="overlay-box">
-                  <div className="user-content">
-                    <a href="">
-                      <img
-                        src={ProfilePic}
-                        className="thumb-lg img-circle"
-                        alt="img"
-                      />
-                    </a>
-                    <h4 className="text-white">{profile.username}</h4>
-                    <h5 className="text-white">{profile.username}</h5>{" "}
-                  </div>
-                </div>
-              </div>
-              <div className="user-btm-box">
-                <div className="col-md-4 col-sm-4 text-center">
-                  <h1>258</h1>{" "}
-                </div>
-                <div className="col-md-4 col-sm-4 text-center">
-                  <h1>125</h1>{" "}
-                </div>
-                <div className="col-md-4 col-sm-4 text-center">
-                  <h1>556</h1>
-                </div>
-              </div>
+            <div className="card">
+              <a href="">
+                <img
+                  src={ProfilePic}
+                  className="thumb-lg img-circle img-floating"
+                  alt="img"
+                />
+              </a>
+              <h3>{profile.username}</h3>
             </div>
+            <div className="card">
+              <label>Refer Code</label>
+              <h1>1221XYZ</h1>
+            </div>
+            <div className="card">
+              <h4>Submitted Documents</h4>
+            </div>
+            <div className="card">
+              <h4>Approved Documents</h4>
+            </div>
+
             {this.state.agentProfile.submitted_documents &&
               this.renderSubmittedDocuments()}
             {this.state.agentProfile.approval_documents &&
@@ -309,8 +301,13 @@ class Settings extends React.PureComponent {
                     />
                     <br />
                     {isValidPhoneNumber(profile.mobile_number)
-                      ? "Number is Valid"
-                      : "Not a Valid Number. Please check the country code and number format"}
+                      ? <div className="alert alert-success">
+                          Number is Valid
+                        </div>
+                      : <div className="alert alert-danger">
+                          Not a Valid Number. Please check the country code and
+                          number format
+                        </div>}
                     <br />
                     <br />
                   </div>

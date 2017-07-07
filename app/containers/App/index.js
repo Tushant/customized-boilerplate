@@ -1,11 +1,3 @@
-/**
- *
- * App
- *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- */
-
 import React from "react";
 import Helmet from "react-helmet/lib/Helmet";
 import Switch from "react-router-dom/Switch";
@@ -16,17 +8,13 @@ import ListHotel from "containers/HomePage/containers/ListHotel/Loadable";
 import NotFoundPage from "containers/NotFoundPage/Loadable";
 import HomeLayout from "containers/HomePage/containers/HomeLayout";
 import BlankLayout from "containers/HomePage/containers/BlankLayout";
-import AdminDashboardLayout
-  from "containers/AdminDashboard/containers/AdminLayout";
+import AdminDashboardLayout from "containers/AdminDashboard/containers/AdminLayout";
 import AdminDashboard from "containers/AdminDashboard/Loadable";
-import AgentDashboardLayout
-  from "containers/AgentDashboard/containers/AgentLayout";
+import AgentDashboardLayout from "containers/AgentDashboard/containers/AgentLayout";
 import AgentDashboard from "containers/AgentDashboard/Loadable";
-import UserDashboardLayout
-  from "containers/UserDashboard/containers/UserLayout";
+import UserDashboardLayout from "containers/UserDashboard/containers/UserLayout";
 import UserDashboard from "containers/UserDashboard/Loadable";
-import HotelDashboardLayout
-  from "containers/HotelDashboard/containers/HotelLayout";
+import HotelDashboardLayout from "containers/HotelDashboard/containers/HotelLayout";
 import HotelDashboard from "containers/HotelDashboard/Loadable";
 
 export class App extends React.Component {
@@ -69,27 +57,23 @@ export class App extends React.Component {
           />
           <Route
             path="/admin/dashboard"
-            render={() => (
-              <AdminDashboardLayout><AdminDashboard /></AdminDashboardLayout>
-            )}
+            render={() =>
+              <AdminDashboardLayout><AdminDashboard /></AdminDashboardLayout>}
           />
           <Route
             path="/agent/dashboard"
-            render={() => (
-              <AgentDashboardLayout><AgentDashboard /></AgentDashboardLayout>
-            )}
+            render={() =>
+              <AgentDashboardLayout><AgentDashboard /></AgentDashboardLayout>}
           />
           <Route
             path="/user/dashboard"
-            render={() => (
-              <UserDashboardLayout><UserDashboard /></UserDashboardLayout>
-            )}
+            render={() =>
+              <UserDashboardLayout><UserDashboard /></UserDashboardLayout>}
           />
           <Route
             path="/hotel/dashboard"
-            render={() => (
-              <HotelDashboardLayout><HotelDashboard /></HotelDashboardLayout>
-            )}
+            render={() =>
+              <HotelDashboardLayout><HotelDashboard /></HotelDashboardLayout>}
           />
           <Route
             path=""
