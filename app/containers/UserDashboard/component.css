@@ -1,0 +1,5 @@
+main nav {
+background-image: linear-gradient(-179deg, #8B572A 0%, #E19724 100%);
+}
+
+main > nav li a:hover, nav li a:active, nav li a:focus{ color:#F5A623; }

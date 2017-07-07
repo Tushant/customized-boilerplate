@@ -3,23 +3,26 @@
  * If we were to do this in store.js, reducers wouldn't be hot reloadable.
  */
 
-import { combineReducers } from 'redux-immutable';
-import { fromJS } from 'immutable';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { fromJS } from "immutable";
 
-import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import { combineReducers } from "redux-immutable";
+import { LOCATION_CHANGE } from "react-router-redux";
 
+import globalReducer from "containers/App/reducer";
+import languageProviderReducer from "containers/LanguageProvider/reducer";
+import loginReducer from "containers/Login/reducer";
+import forgotPasswordReducer from "containers/Login/ForgotPassword/reducer";
 /*
  * routeReducer
  *
  * The reducer merges route location changes into our immutable state.
- * The change is necessitated by moving to react-router-redux@4
+ * The change is necessitated by moving to react-router-redux@5
  *
  */
 
 // Initial routing state
 const routeInitialState = fromJS({
-  location: null,
+  location: null
 });
 
 /**
@@ -30,7 +33,7 @@ function routeReducer(state = routeInitialState, action) {
     /* istanbul ignore next */
     case LOCATION_CHANGE:
       return state.merge({
-        location: action.payload,
+        location: action.payload
       });
     default:
       return state;
@@ -43,7 +46,10 @@ function routeReducer(state = routeInitialState, action) {
 export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
+    global: globalReducer,
+    login: loginReducer,
+    forgotPassword: forgotPasswordReducer,
     language: languageProviderReducer,
-    ...asyncReducers,
+    ...asyncReducers
   });
 }

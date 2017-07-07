@@ -1,0 +1,14 @@
+span.RichEditor-styleButton {
+    margin: 0 20px;
+}
+
+.RichEditor-controls {
+    padding: 10px;
+    background: #2c6aa7;
+    color: #fff;
+    width: 100%;
+}
+
+.editor {
+  margin-top: 30px;
+}
